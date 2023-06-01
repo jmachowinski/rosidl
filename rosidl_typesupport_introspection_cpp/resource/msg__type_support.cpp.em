@@ -40,6 +40,18 @@ header_files = [
 @[    end if]@
 #include "@(header_file)"
 @[end for]@
+
+namespace rosidl_typesupport_introspection_cpp
+{
+
+template<>
+ROSIDL_TYPESUPPORT_INTROSPECTION_CPP_PUBLIC
+const rosidl_message_type_support_t *
+get_message_type_support_handle<@('::'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name]))>();
+
+}  // namespace rosidl_typesupport_introspection_cpp
+
+
 @[for ns in message.structure.namespaced_type.namespaces]@
 
 namespace @(ns)
